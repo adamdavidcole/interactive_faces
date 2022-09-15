@@ -1,34 +1,16 @@
 #include <iostream>
 #include "ofApp.h"
 
-string faceImagesFolder = "face_01/";
+// TODO: preload all relevant images
+string imagesFolder = "face_02/";
 
-ofImage testImage;
-
-int horizontalTileCount = 5;
-int verticalTileCount = 5;
-int imageFolderCount = 12;
-
-vector<Tile> tiles;
+int horizontalTileCount = 6;
+int verticalTileCount = 6;
+int imageCount = 12;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    testImage.load("face_01/000.png"); // first load image, assuming it's in bin/data folder
-    
-    int tileWidth = ofGetWidth() / (float) horizontalTileCount;
-    int tileHeight = ofGetHeight() / (float) verticalTileCount;
-    
-    for (int i = 0; i < horizontalTileCount; i++) {
-        for (int j = 0; j < verticalTileCount; j++) {
-            int tileX = i * tileWidth;
-            int tileY = j * tileHeight;
-            Tile tile(tileWidth, tileHeight, tileX, tileY, faceImagesFolder, imageFolderCount);
-//            tiles.push(tile);
-            tiles.push_back(tile);
-        }
-    }
-    
-    std::cout << "Total tiles: " << tiles.size() << std::endl;
+    tiles = Tiles(verticalTileCount, horizontalTileCount, imagesFolder, imageCount);
 }
 
 //--------------------------------------------------------------
@@ -37,15 +19,16 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofVec2f mousePos(ofGetMouseX(), ofGetMouseY());
-    for (Tile tile : tiles) {
-        tile.draw(mousePos);
-    }
+    tiles.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    std::cout << "Key pressed: " << key << std::endl;
+    int numKey = key - 48;
+    if (numKey < 1 || numKey > 9) return;
+    
+    tiles.updateTileCount(numKey, numKey);
 }
 
 //--------------------------------------------------------------
@@ -85,7 +68,8 @@ void ofApp::mouseExited(int x, int y){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    // TODO: throttle
+    tiles.rebuildTiles();
 }
 
 //--------------------------------------------------------------

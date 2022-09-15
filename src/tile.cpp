@@ -42,21 +42,9 @@ Tile::Tile(int _width, int _height, int _x, int _y, string _imageFolder, int _im
 }
 
 void Tile::draw(ofVec2f mousePos) {
-//    string img_path = imageFolder + "000.png";
-//    std::cout << "Image path: " << img_path << std::endl;
-//    int imageNum = floor(ofRandom(0, imageFolderCount));
     int imageNum = getImageNumFromMousePos(mousePos);
     ofImage img = images[imageNum];
 
-//    string imageFilename = "";
-//    if (imageNum < 10) {
-//        imageFilename = "00" + ofToString(imageNum) + ".png";
-//    } else {
-//        imageFilename = "0" + ofToString(imageNum) + ".png";
-//    }
-//
-    
-//    img.load(imageFolder + imageFilename);
     if (imageNum != lastPhotoNum) {
         img.draw(x, y, width, height);
     }

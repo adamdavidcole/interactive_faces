@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "tile.hpp"
+#include "tiles.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -21,5 +21,8 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+
+ private:
+        Tiles tiles;
+        float lastResizeTime;		
 };

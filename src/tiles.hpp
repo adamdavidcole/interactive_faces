@@ -14,6 +14,20 @@
 class Tiles {
 public:
     Tiles();
+    Tiles(int verticalTileCount, int horizontalTileCount, string imagesFolder, int imageCount);
+    void rebuildTiles();
+    void updateTileCount(int verticalTileCount, int horizontalTileCount);
+    void draw();
+    
+//    
+private:
+    int horizontalTileCount;
+    int verticalTileCount;
+    int imageCount;
+    string imagesFolder;
+
+    vector<Tile> tiles;
+
 };
 
 #endif /* tiles_hpp */
