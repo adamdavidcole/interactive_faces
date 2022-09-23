@@ -9,34 +9,35 @@
 
 ofVec2f UP_VECTOR(0, -1);
 
-Tile::Tile(int _width, int _height, int _x, int _y, string _imageFolder, int _imageFolderCount) {
+Tile::Tile(int _width, int _height, int _x, int _y, string _imageFolder, int _imageFolderCount, vector<string> _imageFileNames) {
     width = _width;
     height = _height;
     x = _x;
     y = _y;
     imageFolder = _imageFolder;
     imageFolderCount = _imageFolderCount;
+    imageFileNames = _imageFileNames;
     
     tileCenterX = x + width / 2;
     tileCenterY = y + height / 2;
     tileCenter = ofVec2f(tileCenterX, tileCenterY);
     
-    for (int i = 0; i < imageFolderCount; i++) {
-        string imageFilename = "";
-        if (i < 10) {
-            imageFilename = "00" + ofToString(i) + ".png";
-        } else {
-            imageFilename = "0" + ofToString(i) + ".png";
-        }
+    for (int i = 0; i < imageFileNames.size(); i++) {
+//        string imageFilename = "";
+//        if (i < 10) {
+//            imageFilename = "00" + ofToString(i) + ".png";
+//        } else {
+//            imageFilename = "0" + ofToString(i) + ".png";
+//        }
         
         ofImage img;
-        img.load(imageFolder + imageFilename);
+        img.load(imageFolder + imageFileNames[i]);
         images.push_back(img);
     }
     
-    ofImage img;
-    img.load(imageFolder + "center.png");
-    images.push_back(img);
+//    ofImage img;
+//    img.load(imageFolder + "center.png");
+//    images.push_back(img);
     
     lastPhotoNum = -1;
 }

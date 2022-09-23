@@ -1,16 +1,20 @@
 #include <iostream>
 #include "ofApp.h"
 
+
 // TODO: preload all relevant images
-string imagesFolder = "face_02/";
+vector<string> imageFolders{ "face_03/", "face_04/", "face_05/", "face_06/", "face_07/", "face_08/", "face_09/", "face_10/", "face_11/", "face_12/", "face_13/", "face_14/", "face_15/", "face_16/", "face_17/", "face_18/", "face_19/", "face_20/", "face_21/", "face_22/", "face_23/", "face_24/", "face_25/", "face_26/", "face_27/", "face_28/", "face_29/", "face_30/", "face_31/", "face_32/", "face_33/", "face_34/", "face_35/", "face_05/", "face_05/", "face_05/",   };
 
 int horizontalTileCount = 6;
 int verticalTileCount = 6;
 int imageCount = 12;
 
+vector<string> imageFileNames{"025.jpg", "156.jpg", "146.jpg", "129.jpg", "120.jpg", "117.jpg", "100.jpg", "096.jpg", "081.jpg", "066.jpg", "055.jpg", "046.jpg", "001.jpg"};
+
 //--------------------------------------------------------------
 void ofApp::setup(){
-    tiles = Tiles(verticalTileCount, horizontalTileCount, imagesFolder, imageCount);
+
+    tiles = Tiles(verticalTileCount, horizontalTileCount, imageFolders, imageCount, imageFileNames);
 }
 
 //--------------------------------------------------------------

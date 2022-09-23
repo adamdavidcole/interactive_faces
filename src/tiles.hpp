@@ -11,10 +11,11 @@
 #include <stdio.h>
 #include "tile.hpp"
 
+
 class Tiles {
 public:
     Tiles();
-    Tiles(int verticalTileCount, int horizontalTileCount, string imagesFolder, int imageCount);
+    Tiles(int verticalTileCount, int horizontalTileCount, vector<string> imageFolders, int imageCount, vector<string> imageFileNames);
     void rebuildTiles();
     void updateTileCount(int verticalTileCount, int horizontalTileCount);
     void draw();
@@ -24,7 +25,8 @@ private:
     int horizontalTileCount;
     int verticalTileCount;
     int imageCount;
-    string imagesFolder;
+    vector<string> imageFolders;
+    vector<string> imageFileNames;
 
     vector<Tile> tiles;
 

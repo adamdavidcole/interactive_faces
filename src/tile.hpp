@@ -15,7 +15,7 @@
 class Tile {
 
 public:
-    Tile(int width, int height, int x, int y, string imageFolder, int imageFolderCount);
+    Tile(int width, int height, int x, int y, string imageFolder, int imageFolderCount, vector<string> imageFileNames);
     void draw(ofVec2f mousePos);
 
 private:
@@ -31,9 +31,14 @@ private:
     string imageFolder;
     int imageFolderCount;
     
+    vector<string> imageFileNames;
+    
     int lastPhotoNum;
     
     vector<ofImage> images;
+    
+    ofVideoPlayer videoPlayer;
+
     
     int getImageNumFromMousePos(ofVec2f mousePos);
 };

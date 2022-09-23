@@ -5,15 +5,20 @@
 //  Created by Adam Cole on 9/15/22.
 //
 
+#include <algorithm>
+#include <random>
 #include "tiles.hpp"
+
+
 
 Tiles::Tiles() {}
 
-Tiles::Tiles(int _verticalTileCount, int _horizontalTileCount, string _imagesFolder, int _imageCount) {
+Tiles::Tiles(int _verticalTileCount, int _horizontalTileCount, vector<string> _imageFolders, int _imageCount, vector<string> _imageFileNames) {
     verticalTileCount = _verticalTileCount;
     horizontalTileCount = _horizontalTileCount;
-    imagesFolder = _imagesFolder;
+    imageFolders = _imageFolders;
     imageCount = _imageCount;
+    imageFileNames = _imageFileNames;
     
     rebuildTiles();
     
@@ -21,6 +26,10 @@ Tiles::Tiles(int _verticalTileCount, int _horizontalTileCount, string _imagesFol
 
 void Tiles::rebuildTiles() {
     tiles = vector<Tile>();
+    
+    auto rng = std::default_random_engine {};
+    std::shuffle(std::begin(imageFolders), std::end(imageFolders), rng);
+
 
     int tileWidth = ofGetWidth() / (float) horizontalTileCount;
     int tileHeight = ofGetHeight() / (float) verticalTileCount;
@@ -29,7 +38,10 @@ void Tiles::rebuildTiles() {
         for (int j = 0; j < verticalTileCount; j++) {
             int tileX = i * tileWidth;
             int tileY = j * tileHeight;
-            Tile tile(tileWidth, tileHeight, tileX, tileY, imagesFolder, imageCount);
+            
+            int imageFolderIndex = ((horizontalTileCount * i) + j) % imageFolders.size();
+            
+            Tile tile(tileWidth, tileHeight, tileX, tileY, imageFolders[imageFolderIndex], imageCount, imageFileNames);
 //            tiles.push(tile);
             tiles.push_back(tile);
         }
