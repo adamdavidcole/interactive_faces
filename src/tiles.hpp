@@ -19,6 +19,7 @@ public:
     void rebuildTiles();
     void updateTileCount(int verticalTileCount, int horizontalTileCount);
     void draw();
+    void toggleVideoPlay();
     
 //    
 private:
@@ -29,7 +30,7 @@ private:
     vector<string> imageFileNames;
 
     vector<Tile> tiles;
-
+    
 };
 
 #endif /* tiles_hpp */

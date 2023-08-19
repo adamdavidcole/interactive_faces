@@ -35,19 +35,38 @@ Tile::Tile(int _width, int _height, int _x, int _y, string _imageFolder, int _im
         images.push_back(img);
     }
     
+    videoPlayer.load(imageFolder + "face.mp4");
+    videoPlayer.setLoopState(OF_LOOP_NORMAL);
+
+    
 //    ofImage img;
 //    img.load(imageFolder + "center.png");
 //    images.push_back(img);
     
     lastPhotoNum = -1;
+    
+    shouldShowVideo = 0;
+
+//    while(!videoPlayer.isLoaded()) {
+//        sleep(1);
+//    }
+//
+    if (shouldShowVideo) {
+        videoPlayer.play();
+    }
 }
 
 void Tile::draw(ofVec2f mousePos) {
-    int imageNum = getImageNumFromMousePos(mousePos);
-    ofImage img = images[imageNum];
-
-    if (imageNum != lastPhotoNum) {
-        img.draw(x, y, width, height);
+    if (videoPlayer.isPlaying()) {
+        videoPlayer.update();
+        videoPlayer.draw(x, y, width, height);
+    } else {
+        int imageNum = getImageNumFromMousePos(mousePos);
+        ofImage img = images[imageNum];
+        
+        if (imageNum != lastPhotoNum) {
+            img.draw(x, y, width, height);
+        }
     }
 }
 
@@ -70,4 +89,20 @@ int Tile::getImageNumFromMousePos(ofVec2f mousePos) {
     
     int imageNum = floor(angle / angleIncrement);
     return imageNum;
+}
+
+void Tile::toggleVideoPlay() {
+    cout << "before: " << shouldShowVideo << endl;
+    
+//    showVideo = !showVideo;
+//    if (showVideo) {
+//        showVideo = false;
+////        videoPlayer.paus();
+//    } else {
+//        showVideo = true;
+////        videoPlayer.play();
+//    }
+    
+    cout << "after: " << shouldShowVideo << endl;
+    
 }

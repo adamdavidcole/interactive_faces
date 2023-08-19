@@ -30,9 +30,10 @@ void Tiles::rebuildTiles() {
     auto rng = std::default_random_engine {};
     std::shuffle(std::begin(imageFolders), std::end(imageFolders), rng);
 
-
     int tileWidth = ofGetWidth() / (float) horizontalTileCount;
     int tileHeight = ofGetHeight() / (float) verticalTileCount;
+    
+    cout << "First image folder: " << imageFolders[0] << endl;
     
     for (int i = 0; i < horizontalTileCount; i++) {
         for (int j = 0; j < verticalTileCount; j++) {
@@ -60,5 +61,19 @@ void Tiles::draw() {
     ofVec2f mousePos(ofGetMouseX(), ofGetMouseY());
     for (Tile tile : tiles) {
         tile.draw(mousePos);
+    }
+}
+
+void Tiles::toggleVideoPlay() {
+    cout << "Tiles::toggleVideoPlay" << endl;
+    for (Tile tile : tiles) {
+        if (tile.videoPlayer.isPlaying()) {
+            tile.shouldShowVideo = 0;
+            tile.videoPlayer.stop();
+        } else {
+            tile.shouldShowVideo = 1;
+            tile.videoPlayer.play();
+        }
+
     }
 }
